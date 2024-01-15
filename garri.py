@@ -1,6 +1,8 @@
 import speech_recognition as sr
 
-class Garri():
+from speech_synthesis import Speech_synthesis
+
+class Garri(Speech_synthesis):
     sr.LANGUAGE = 'ru-RU'
     
     def __init__(self, keyword: str, listening: bool):
@@ -8,43 +10,21 @@ class Garri():
         self.listening = listening
         self.r = sr.Recognizer()
         self.mic = sr.Microphone()
-        
-    def sayHello(self) -> None:
-        from gtts import gTTS
-        text = "Привет!"
-        tts = gTTS(text=text, lang='ru', tld='com')
-        tts.save("./mp3/output.mp3")
-
-        from pydub import AudioSegment
-        from pydub.playback import play
-
-        sound = AudioSegment.from_file("./mp3/output.mp3", format="mp3")
-        play(sound)
-
-    def sayOk(self) -> None:
-        from gtts import gTTS
-        
-        text = "хорошо!"
-        tts = gTTS(text=text, lang='ru', tld='com')
-        tts.save("./mp3/output.mp3")
-
-        from pydub import AudioSegment
-        from pydub.playback import play
-
-        sound = AudioSegment.from_file("./mp3/output.mp3", format="mp3")
-        play(sound)
 
     def sending_a_recorded_voice(self, text: str) -> None:
-        import requests
-        url = 'http://127.0.0.1:8000'
-        text = text
-        data = {'text': text}
+        if text.lower() == 'включи свет':
+            print('sendeng... свет будет включен')
+            # import requests
+            # url = 'http://127.0.0.1:8000'
+            # text = text
+            # data = {'text': text}
+            
+            # response = requests.post(url, json=data)
+            # if response.status_code == 200:
+            #     print('Запрос на включения света успешно отправлен')
+            # else:
+            #     print('Произошла ошибка при отправке запроса на включения света')
         
-        response = requests.post(url, json=data)
-        if response.status_code == 200:
-            print('Запрос успешно отправлен')
-        else:
-            print('Произошла ошибка при отправке запроса')
 
     def listen_for_keyword(self, keyword: str) -> bool:
         with self.mic as source:

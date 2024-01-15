@@ -11,10 +11,3 @@ while garri.listening:
         garri.record_text(5)
         garri.sayOk()
         # garri.listening = False
-
-
-
-
-
-
-
