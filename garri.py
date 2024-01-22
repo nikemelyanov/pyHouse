@@ -35,7 +35,7 @@ class Garri(Speech_synthesis):
         try:
             text = self.r.recognize_google(audio, language='ru-RU')
             if keyword in text.lower():
-                print('Кодовое слово обнаружено!')
+                print(f'кодовое слово - {keyword} обнаружено!')
                 return True
             else:
                 return False
